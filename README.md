@@ -1,4 +1,4 @@
-= Description
+# Description
 
 Creates and installs Conjur host identity using Chef attributes and the Conjur 
 [host factory](http://developer.conjur.net/reference/services/host_factory).
