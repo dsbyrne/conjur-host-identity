@@ -1,4 +1,4 @@
-name              'conjur-client'
+name              'conjur-host-identity'
 maintainer        'Conjur, Inc.'
 maintainer_email  'kgilpin@conjur.net'
 license           'MIT'
