@@ -15,7 +15,12 @@
 #
 
 # Alternatively, package 'ruby-devel'
-package 'ruby-json'
+case node.platform_family
+when 'rhel'
+  package 'rubygem-json'
+else
+  package 'ruby-json'
+end
 
 chef_gem 'conjur-cli'
 chef_gem 'conjur-asset-host-factory'
