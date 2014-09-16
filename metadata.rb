@@ -4,7 +4,7 @@ maintainer_email  'kgilpin@conjur.net'
 license           'MIT'
 description       'Obtains and istalls the Conjur host identity from Chef attributes'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '0.3.0'
+version           '1.0.1'
 
 attribute "conjur/host_factory_token", 
   description: "Conjur host factory token used to create the host identity.",
