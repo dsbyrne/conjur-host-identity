@@ -2,7 +2,7 @@ name              'conjur-host-identity'
 maintainer        'Conjur, Inc.'
 maintainer_email  'kgilpin@conjur.net'
 license           'MIT'
-description       'Obtains and istalls the Conjur host identity from Chef attributes'
+description       'Obtains and installs the Conjur host identity from Chef attributes'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '1.0.1'
 
