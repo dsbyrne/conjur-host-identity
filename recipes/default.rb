@@ -28,6 +28,7 @@ chef_gem 'conjur-asset-host-factory'
 appliance_url = node.conjur.configuration.appliance_url
 account = node.conjur.configuration.account
 netrc_path = node.conjur.configuration.netrc_path
+cert_file = "/etc/conjur-#{account}.pem"
 
 ConjurHelper.update_config(node) do |conjur_config|
   conjur_config['appliance_url'] = appliance_url
@@ -35,10 +36,16 @@ ConjurHelper.update_config(node) do |conjur_config|
   conjur_config['netrc_path'] = netrc_path
 end
 
-# Store the Conjur SSL certificate, if it's available.
+if File.exist?(cert_file)
+  File.chmod 0644, cert_file
+  ConjurHelper.update_config(node) do |conjur_config|
+    conjur_config['cert_file'] = cert_file
+  end
+end
+
+# Store the Conjur SSL certificate coming in a string
 if node.conjur.configuration['ssl_certificate']
   require 'fileutils'
-  cert_file = "/etc/conjur-#{account}.pem" 
   File.write(cert_file, node.conjur.configuration.ssl_certificate)
   File.chmod 0644, cert_file
   ConjurHelper.update_config(node) do |conjur_config|

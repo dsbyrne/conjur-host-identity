@@ -13,6 +13,8 @@ Basically, you should populate Chef attributes which configure the connection to
 * Organization account name
 * SSL certificate
 
+The cookbook will auto-detect a SSL certificate at `/etc/conjur-#{account}.pem`.
+
 You also need to provide two other pieces of information:
 
 * Host factory token.
