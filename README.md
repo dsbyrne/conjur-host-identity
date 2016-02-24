@@ -17,25 +17,25 @@ end
 
 Attributes
 ----------
-`account`
+`account`  
 Name of the account that Conjur was configured with
-
-`appliance_url`
+  
+`appliance_url`  
 URL to the Conjur appliance
-
-`host_identity`
+  
+`host_identity`  
 The name of the host to be created
-
-`host_factory_token`
+  
+`host_factory_token`  
 The host factory token to be used in exchange for a Conjur identity
-
-`ssl_certificate`
-The contents of the SSL certificate to verify the Conjur server
-_or_
+  
+`ssl_certificate`  
+The contents of the SSL certificate to verify the Conjur server  
+_or_  
 The path to an existing certificate on disk
-
-`ssh`
+  
+`ssh`  
 If true, the machine will run the [Conjur cookbook](https://github.com/conjur-cookbooks/conjur, configuring the machine for SSH and audit logging.
 
-`overwrite`
-If true, any existing identity on the machine will be overwritten.
+`overwrite`  
+If true, any existing identity on the machine will be overwritten.  
