@@ -35,7 +35,7 @@ _or_
 The path to an existing certificate on disk
   
 `ssh`  
-If true, the machine will run the [Conjur cookbook](https://github.com/conjur-cookbooks/conjur, configuring the machine for SSH and audit logging.
+If true, the machine will run the [Conjur cookbook](https://github.com/conjur-cookbooks/conjur), configuring the machine for SSH and audit logging.
 
 `overwrite`  
 If true, any existing identity on the machine will be overwritten.  
