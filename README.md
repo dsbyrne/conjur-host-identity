@@ -1,54 +1,41 @@
-# Description
+conjur-host-identity
+====================
+The conjur-host-identity cookbook is a library cookbook that provides a conjurize resource for use in recipes.
 
-Creates and installs Conjur host identity using Chef attributes and the Conjur 
-[host factory](http://developer.conjur.net/reference/services/host_factory).
+Usage
+-----
+```ruby
+conjurize 'host-identity' do
+  account            node['conjur']['account']
+  appliance_url      node['conjur']['appliance_url']
+  host_identity      node['fqdn']
+  host_factory_token node['service-host']['host_factory_token']
+  ssl_certificate    node['conjur']['certificate']
+  ssh                true
+end
+```
 
-## Attributes
+Attributes
+----------
+`account`
+Name of the account that Conjur was configured with
 
-See the Chef metadata.rb for detailed information about the attributes used by this recipe.
+`appliance_url`
+URL to the Conjur appliance
 
-Basically, you should populate Chef attributes which configure the connection to Conjur:
+`host_identity`
+The name of the host to be created
 
-* Appliance URL
-* Organization account name
-* SSL certificate
+`host_factory_token`
+The host factory token to be used in exchange for a Conjur identity
 
-The cookbook will auto-detect a SSL certificate at `/etc/conjur-#{account}.pem`.
+`ssl_certificate`
+The contents of the SSL certificate to verify the Conjur server
+_or_
+The path to an existing certificate on disk
 
-You also need to provide two other pieces of information:
+`ssh`
+If true, the machine will run the [Conjur cookbook](https://github.com/conjur-cookbooks/conjur, configuring the machine for SSH and audit logging.
 
-* Host factory token.
-* Id for the host. You can use some data from OHAI (such as the AWS instance id), or the Chef node name,
-or whatever you like. It needs to be unique across your Conjur system.
-
-## Conjur gem installation
-
-The Conjur API and Conjur CLI gems are installed by [chef_gem](https://docs.getchef.com/resource_chef_gem.html). 
-Therefore they can be used in any other subsequent cookbook as well.
-
-This is very handy for fetching secrets from Conjur. You can find an example in our
-[asgard config](https://github.com/conjurdemos/chef-asgard-config/blob/master/recipes/default.rb) demo cookbook.
-
-## Conjur configuration
-
-This cookbook builds `/etc/conjur.conf` from the Conjur connection information. This configuration will be used
-by all the downstream Conjur functionality.
-
-File permissions are `0644`.
-
-## Conjur host identity
-
-This cookbook looks for a host identity in `/etc/conjur.identity`. If that file exists, it's left intact.
-
-If it doesn't exist, the host factory token is used to provision a new host identity, which is then saved to the file.
-File permissions are `0600`.
-
-The `netrc_path` entry in `conjur.conf` points to `/etc/conjur.identity`. Therefore, downstream Conjur tools such as the
-Conjur CLI will automatically pick up the host identity from this file and use it.
-
-# Testing
-
-Once the cookbook has run, you can verify the host identity by running `conjur authn whoami`. For example:
-
-    # /opt/chef/embedded/bin/conjur authn whoami
-    {"account":"demo","username":"host/kgilpin@spudling.local/chef-tutorial-1-0/vagrant/ff849c12-95d7-4720-9fb7-2c2be88582f7"}
+`overwrite`
+If true, any existing identity on the machine will be overwritten.
