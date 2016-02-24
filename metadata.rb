@@ -29,3 +29,5 @@ attribute "conjur/configuration/netrc_path",
 %w(debian ubuntu centos fedora).each do |platform|
   supports platform
 end
+
+depends 'conjur'
